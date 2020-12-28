@@ -1,0 +1,38 @@
+.modal {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	width: 100vw;
+	z-index: 4;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-hidden {
+	display: none !important;
+}
+
+.modal-container {
+	background-color: white;
+	border-radius: 10px;
+}
+
+.btn-modal-close {
+	float: right;
+	margin: 10px 10px 0 0;
+	background-color: transparent;
+	text-align: center;
+	border: none;
+	text-decoration: none;
+	color: #343a40;
+}
+
+.btn-modal-close:focus {
+	outline: 0;
+}
+
+.btn-modal-close:hover {
+	border: 1px solid #343a40;
+	color: red;
+}

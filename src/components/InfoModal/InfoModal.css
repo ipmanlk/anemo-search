@@ -1,0 +1,102 @@
+/* General */
+.info-modal {
+	padding: 30px;
+}
+
+.info-modal-container {
+	display: grid;
+	grid-template-columns: 2fr 8fr;
+	gap: 1em;
+	width: 50vw;
+}
+
+/* Left column: Cover image and meta tags */
+.info-modal-cover {
+	width: 150px;
+	border-radius: 5px;
+}
+
+.info-modal-meta {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	margin-top: 10px;
+	line-height: 22px;
+}
+
+.info-modal-meta span {
+	display: block;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.info-modal-meta span a {
+	font-weight: normal;
+}
+
+/* Right column: Details */
+.info-modal-right {
+	max-height: 500px;
+	overflow-y: scroll;
+}
+
+.info-modal-right h3 {
+	margin: 0;
+}
+
+.info-modal-right hr {
+	margin: 5px 0;
+}
+
+.info-modal-right ul {
+	font-size: 15px;
+	list-style-type: square;
+}
+
+.info-modal-right ul li:hover {
+	font-size: 16px;
+}
+
+.info-modal-right ul li a {
+	text-decoration: none;
+}
+
+.info-modal-right ul li a:hover {
+	color: red;
+}
+
+.info-modal-tags ul {
+	list-style-type: none;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.info-modal-tags ul li {
+	background-color: #343a40;
+	color: white;
+	margin: 5px;
+	padding: 5px 10px;
+	border-radius: 10px;
+	font-size: 12px;
+}
+
+.info-modal-tags ul li:hover {
+	background-color: #585858;
+	font-size: 12px;
+}
+
+/* make responsive for small screens */
+@media only screen and (max-width: 800px) {
+	.info-modal-container {
+		display: flex;
+		flex-direction: column;
+		width: 50vw;
+		height: 80vh;
+		overflow-y: scroll;
+	}
+
+	.info-modal-right {
+		overflow-y: initial;
+	}
+}

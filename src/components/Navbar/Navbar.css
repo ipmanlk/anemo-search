@@ -1,0 +1,85 @@
+.navbar {
+	display: flex;
+	background-color: #343a40;
+	padding: 0.8rem 1rem;
+	margin: 0 8vw 0 8vw;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.navbar a {
+	color: rgb(232, 230, 227);
+	text-decoration: none;
+}
+
+/* brand name */
+.navbar-brand {
+	text-decoration: none;
+	font-size: 20px;
+}
+
+/* search container */
+/* .navbar-search {
+	display: flex;
+	flex-wrap: nowrap;
+} */
+
+/* search bar */
+.navbar-search-input {
+	height: 25px;
+	width: 40vw;
+	border: none;
+	outline: none;
+	font-size: 14px;
+	padding: 5px;
+	color: #343a40;
+}
+
+/* links */
+.navbar-links {
+	margin-left: 10px;
+}
+
+.navbar-links a {
+	color: #a0a8b1;
+	margin-right: 20px;
+}
+
+.navbar-links a:hover {
+	color: #ffffff;
+	margin-right: 20px;
+}
+
+/* search button */
+.btn-navbar-search {
+	height: 35px;
+	font-size: 14px;
+	padding: 0 10px;
+	text-align: center;
+	border: none;
+	outline: none;
+	background-color: rgb(11, 100, 172);
+	color: white;
+}
+
+.btn-navbar-search:hover {
+	background-color: rgb(46, 161, 255);
+}
+
+/* responsiveness */
+@media only screen and (max-width: 850px) {
+	.navbar {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.navbar-links,
+	.navbar-search {
+		margin-top: 10px;
+		margin-left: 0;
+	}
+	.navbar-links a:last-child {
+		margin-right: 0;
+	}
+}
