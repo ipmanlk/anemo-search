@@ -22,4 +22,6 @@ export interface AnimeSeason {
 
 export interface DbInitOptions {
 	progressUpdater(currentPercentage: number): void;
+	loadingTextUpdater(loadingText: string): void;
+	successCallback(): void;
 }

@@ -14,6 +14,7 @@ export class Database {
 		});
 
 		return new Promise(async (resolve, reject) => {
+			initOptions.loadingTextUpdater("Checking database version...");
 			console.log("Log: Checking database version");
 
 			let latestCommit = await (
@@ -25,44 +26,68 @@ export class Database {
 				.catch((e) => reject(e));
 
 			const infoRow = await this.db.info.get(1).catch((e: any) => reject(e));
-
 			// handle api rate limit errors (use offline sha or reject if offline db not present)
 			if (!latestCommit || !latestCommit.commit) {
 				if (!infoRow) reject();
 				latestCommit = { commit: { sha: infoRow.commitHash } };
 			}
 
+			let isNewVersionAvailable = false;
+
 			if (infoRow) {
 				if (infoRow.commitHash === latestCommit.commit.sha) {
+					initOptions.successCallback();
 					resolve({ status: true });
 					return;
 				}
+
+				isNewVersionAvailable = true;
+
+				initOptions.loadingTextUpdater(
+					"New database version found!./nUpdate will run in the background."
+				);
 				console.log("Log: New database version found");
-				await this.db.info.clear().catch((e: any) => reject(e));
-				await this.db.animeOffline.clear().catch((e: any) => reject(e));
+
+				setTimeout(() => {
+					initOptions.successCallback();
+				}, 8000);
+			}
+			if (!isNewVersionAvailable) {
+				initOptions.loadingTextUpdater(
+					"Downloading database.../nBe patient. This might take some time in the first run."
+				);
 			}
 
-			console.log("Log: Updating database");
+			console.log("Log: Downloading database");
 			axios
-				.get(
-					"https://pls-fix-cors.herokuapp.com/?url=https://github.com/manami-project/anime-offline-database/blob/master/anime-offline-database.json?raw=true",
-					{
-						onDownloadProgress: (progressEvent) => {
+				.get("https://tinyurl.com/y7byxw23", {
+					onDownloadProgress: (progressEvent) => {
+						if (!isNewVersionAvailable) {
 							let percentCompleted = Math.round(
 								(progressEvent.loaded * 100) / progressEvent.total
 							);
 							initOptions.progressUpdater(percentCompleted);
-						},
-					}
-				)
+						}
+					},
+				})
 				.then(async (res) => {
-					await this.db.animeOffline.bulkPut(res.data.data);
-					await this.db.info.put({
-						id: 1,
-						commitHash: latestCommit.commit.sha,
-					});
-					console.log("Log: Database update completed");
-					resolve(true);
+					try {
+						if (isNewVersionAvailable) {
+							await this.db.info.clear();
+							await this.db.animeOffline.clear();
+						}
+						await this.db.animeOffline.bulkPut(res.data.data);
+						await this.db.info.put({
+							id: 1,
+							commitHash: latestCommit.commit.sha,
+						});
+						console.log("Log: Database update completed");
+
+						if (!isNewVersionAvailable) initOptions.successCallback();
+						resolve(true);
+					} catch (e: any) {
+						reject(e);
+					}
 				})
 				.catch((error) => {
 					if (error.response) {

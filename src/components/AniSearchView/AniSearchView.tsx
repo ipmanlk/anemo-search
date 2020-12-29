@@ -45,7 +45,6 @@ export class AniSearchView extends React.Component<IProps, IState> {
 	componentDidMount() {
 		this.setState({
 			isLoadingOverlayVisible: true,
-			loadingOverlayText: "Loading Database...",
 		});
 
 		const initOptions: DbInitOptions = {
@@ -55,25 +54,29 @@ export class AniSearchView extends React.Component<IProps, IState> {
 					setTimeout(() => this.setState({ loadingOverlayProgress: "" }), 1000);
 				}
 			},
-		};
-
-		Database.init(initOptions)
-			.then(() => {
+			loadingTextUpdater: (loadingText: string = "") => {
+				if (loadingText !== "") {
+					this.setState({ loadingOverlayText: loadingText });
+				}
+			},
+			successCallback: () => {
 				Database.getRandomAnimeList().then((animeList: AnimeList) => {
 					this.setState({ animeList: animeList });
 				});
 
 				this.setState({ isLoadingOverlayVisible: false });
-			})
-			.catch((e) => {
-				this.setState({
-					isLoadingOverlayVisible: true,
-					isLoadingOverlaySpinnerVisible: false,
-					loadingOverlayText: `Unable to load the database! Error: ${JSON.stringify(
-						e
-					)}`,
-				});
+			},
+		};
+
+		Database.init(initOptions).catch((e) => {
+			this.setState({
+				isLoadingOverlayVisible: true,
+				isLoadingOverlaySpinnerVisible: false,
+				loadingOverlayText: `Unable to load the database!/nError: ${JSON.stringify(
+					e
+				)}`,
 			});
+		});
 	}
 
 	handleInfoModalVisibility(isVisible: boolean) {
