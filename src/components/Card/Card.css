@@ -62,3 +62,32 @@
 .card-button:hover {
 	background-color: rgb(46, 161, 255);
 }
+
+@media only screen and (max-width: 850px) {
+	.card {
+		max-width: 100px;
+	}
+
+	.card-cover {
+		width: 100px;
+		height: 142px;
+	}
+
+	.card-title-background {
+		height: 40px;
+		width: 100px;
+		margin-top: -40px;
+		z-index: 1;
+	}
+
+	.card-title {
+		height: 30px;
+		padding: 5px;
+		margin-top: -40px;
+		backdrop-filter: unset;
+	}
+
+	.card-title span {
+		font-size: 12px;
+	}
+}

@@ -28,6 +28,7 @@
 .navbar-search-input {
 	height: 25px;
 	width: 40vw;
+	max-width: 40vw;
 	border: none;
 	outline: none;
 	font-size: 14px;
@@ -67,6 +68,12 @@
 }
 
 /* responsiveness */
+@media only screen and (max-width: 960px) {
+	.navbar-search-input {
+		width: 30vw;
+	}
+}
+
 @media only screen and (max-width: 850px) {
 	.navbar {
 		display: flex;
