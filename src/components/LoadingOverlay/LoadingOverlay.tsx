@@ -29,7 +29,11 @@ export function LoadingOverlay(props: IProps) {
 				) : (
 					""
 				)}
-				<h3 className="loading-overlay-text">{props.text}</h3>
+				<div className="loading-overlay-text">
+					{props.text.split("/n").map((t, index) => (
+						<h3 key={index}>{t}</h3>
+					))}
+				</div>
 			</div>
 		</div>
 	);

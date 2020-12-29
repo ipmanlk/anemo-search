@@ -20,15 +20,30 @@
 	align-items: center;
 }
 
-.loading-overlay-text,
-.loading-overlay-progress {
+.loading-overlay-progress,
+.loading-overlay-text h3 {
 	color: white;
 	margin: 0;
 	padding: 0;
 }
 
+.loading-overlay-text h3 {
+	font-size: 13px;
+	font-style: italic;
+	font-weight: normal;
+}
+
 .loading-overlay-text {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+.loading-overlay-text h3:first-child {
 	font-size: 16px;
+	font-style: initial;
+	font-weight: bold;
+	margin-bottom: 5px;
 }
 
 .loading-overlay-progress {
