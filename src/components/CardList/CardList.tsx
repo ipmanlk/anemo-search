@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useRef } from "react";
 import "./CardList.css";
 import { Card } from "../Card/Card";
 import { AnimeList } from "../../types";
@@ -10,26 +10,37 @@ interface IProps {
 }
 
 export function CardList(props: IProps) {
+	const observer = useRef<any>();
+
+	const lastCardRef = useCallback((node) => {
+		if (observer.current) observer.current.disconnect();
+		observer.current = new IntersectionObserver((entries) => {
+			if (entries[0].isIntersecting) {
+				props.handleCardListScrollToBottom();
+			}
+		});
+		if (node) observer.current.observe(node);
+	}, []);
+
 	return (
 		<div className="card-list">
-			<div
-				className="card-list-container"
-				onScroll={(e: any) => {
-					const element = e.target;
-					const visibleHeight = element.scrollTop;
-					const fullHeight = element.scrollHeight - element.offsetHeight;
-					if (visibleHeight == fullHeight) {
-						props.handleCardListScrollToBottom();
-					}
-				}}
-			>
-				{props.animeList.map((anime, index) => (
-					<Card
-						key={index}
-						anime={anime}
-						handleCardClick={props.handleCardClick}
-					/>
-				))}
+			<div className="card-list-container">
+				{props.animeList.map((anime, index) =>
+					props.animeList.length === index + 1 ? (
+						<Card
+							key={index}
+							lastCardRef={lastCardRef}
+							anime={anime}
+							handleCardClick={props.handleCardClick}
+						/>
+					) : (
+						<Card
+							key={index}
+							anime={anime}
+							handleCardClick={props.handleCardClick}
+						/>
+					)
+				)}
 			</div>
 		</div>
 	);
