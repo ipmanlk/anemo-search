@@ -1,6 +1,19 @@
+.card-list-container::-webkit-scrollbar {
+	width: 0.5rem;
+}
+
+.card-list-container::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.card-list-container::-webkit-scrollbar-thumb {
+	background-color: darkgrey;
+	outline: 1px solid slategrey;
+}
+
 .card-list {
-	margin: 30px 80px 10px 80px;
-	padding: 20px;
+	margin: 30px 80px 30px 80px;
+	padding: 15px 10px;
 	background-color: rgba(250, 250, 250, 0.5);
 	border-radius: 10px;
 }
@@ -8,7 +21,7 @@
 .card-list-container {
 	display: flex;
 	flex-wrap: wrap;
-	max-height: 80vh;
+	max-height: 100vh;
 	overflow-y: scroll;
 }
 

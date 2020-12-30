@@ -26,7 +26,7 @@ export function CardList(props: IProps) {
 		<div className="card-list">
 			<div className="card-list-container">
 				{props.animeList.map((anime, index) =>
-					props.animeList.length === index + 1 ? (
+					props.animeList.length - 10 === index ? (
 						<Card
 							key={index}
 							lastCardRef={lastCardRef}

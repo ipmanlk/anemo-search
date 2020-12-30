@@ -1,4 +1,4 @@
-const appCache = "v1";
+const appCache = "v2";
 
 self.addEventListener("install", (event) => {
 	console.log("Log: ServiceWorker installation successful");
