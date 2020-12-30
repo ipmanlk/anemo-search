@@ -24,10 +24,8 @@ export function LoadingOverlay(props: IProps) {
 				) : (
 					""
 				)}
-				{props.progress !== "" ? (
+				{props.progress !== "" && (
 					<h3 className="loading-overlay-progress">{props.progress}</h3>
-				) : (
-					""
 				)}
 				<div className="loading-overlay-text">
 					{props.text.split("/n").map((t, index) => (

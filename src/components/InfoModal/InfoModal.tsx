@@ -49,7 +49,7 @@ export function InfoModal(props: IProps) {
 					</div>
 
 					<div className="info-modal-right">
-						{anime?.synonyms && anime.synonyms.length > 0 ? (
+						{anime?.synonyms && anime.synonyms.length > 0 && (
 							<div className="info-modal-synonyms">
 								<h3>Synonyms</h3>
 								<hr />
@@ -59,11 +59,9 @@ export function InfoModal(props: IProps) {
 									))}
 								</ul>
 							</div>
-						) : (
-							""
 						)}
 
-						{anime?.sources && anime.sources.length > 0 ? (
+						{anime?.sources && anime.sources.length > 0 && (
 							<div className="info-modal-sources">
 								<h3>Sources</h3>
 								<hr />
@@ -77,11 +75,9 @@ export function InfoModal(props: IProps) {
 									))}
 								</ul>
 							</div>
-						) : (
-							""
 						)}
 
-						{anime?.relations && anime.relations.length > 0 ? (
+						{anime?.relations && anime.relations.length > 0 && (
 							<div className="info-modal-relations">
 								<h3>Relations</h3>
 								<hr />
@@ -95,11 +91,9 @@ export function InfoModal(props: IProps) {
 									))}
 								</ul>
 							</div>
-						) : (
-							""
 						)}
 
-						{anime?.tags && anime.tags.length > 0 ? (
+						{anime?.tags && anime.tags.length > 0 && (
 							<div className="info-modal-tags">
 								<h3>Tags</h3>
 								<hr />
@@ -109,8 +103,6 @@ export function InfoModal(props: IProps) {
 									))}
 								</ul>
 							</div>
-						) : (
-							""
 						)}
 					</div>
 				</div>
