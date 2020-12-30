@@ -17,13 +17,27 @@ export class Database {
 			initOptions.loadingTextUpdater("Checking database version...");
 			console.log("Log: Checking database version");
 
-			let latestCommit = await (
-				await fetch(
-					"https://api.github.com/repos/manami-project/anime-offline-database/branches/master"
-				)
-			)
-				.json()
-				.catch((e) => reject(e));
+			let latestCommit: any = await new Promise(async (resolve) => {
+				// timeout for fetch request
+				const timeout = setTimeout(() => {
+					clearTimeout(timeout);
+					resolve(false);
+				}, 2000);
+
+				// make api request
+				try {
+					const res = await (
+						await fetch(
+							"https://api.github.com/repos/manami-project/anime-offline-database/branches/master"
+						)
+					).json();
+					clearTimeout(timeout);
+					resolve(res);
+				} catch {
+					clearTimeout(timeout);
+					resolve(false);
+				}
+			});
 
 			const infoRow = await this.db.info.get(1).catch((e: any) => reject(e));
 			// handle api rate limit errors (use offline sha or reject if offline db not present)
