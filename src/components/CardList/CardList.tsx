@@ -23,24 +23,26 @@ export function CardList(props: IProps) {
 	}, []);
 
 	return (
-		<div className="card-list">
-			<div className="card-list-container">
-				{props.animeList.map((anime, index) =>
-					props.animeList.length - 10 === index ? (
-						<Card
-							key={index}
-							lastCardRef={lastCardRef}
-							anime={anime}
-							handleCardClick={props.handleCardClick}
-						/>
-					) : (
-						<Card
-							key={index}
-							anime={anime}
-							handleCardClick={props.handleCardClick}
-						/>
-					)
-				)}
+		<div className="card-list-root">
+			<div className="card-list">
+				<div className="card-list-container">
+					{props.animeList.map((anime, index) =>
+						props.animeList.length - 10 === index ? (
+							<Card
+								key={index}
+								lastCardRef={lastCardRef}
+								anime={anime}
+								handleCardClick={props.handleCardClick}
+							/>
+						) : (
+							<Card
+								key={index}
+								anime={anime}
+								handleCardClick={props.handleCardClick}
+							/>
+						)
+					)}
+				</div>
 			</div>
 		</div>
 	);
